@@ -1,0 +1,33 @@
+{
+    "name": "@fern-fern/nursery-api-client",
+    "version": "0.0.12",
+    "main": "./index.js",
+    "types": "./types/index.d.ts",
+    "files": [
+        "/api",
+        "/schemas",
+        "/core",
+        "/index.*",
+        "!*.ts",
+        "/types"
+    ],
+    "scripts": {
+        "format": "prettier --write '**/*.ts'",
+        "build": "esbuild $(find . -name '*.ts' -not -path './node_modules/*') --format=cjs --sourcemap --outdir=. && tsc"
+    },
+    "dependencies": {
+        "@types/url-join": "4.0.1",
+        "axios": "^0.27.2",
+        "url-join": "4.0.1"
+    },
+    "peerDependencies": {
+        "axios": "*"
+    },
+    "devDependencies": {
+        "@types/node": "17.0.33",
+        "esbuild": "0.14.47",
+        "prettier": "2.7.1",
+        "typescript": "4.6.4"
+    },
+    "packageManager": "yarn@3.2.4"
+}
