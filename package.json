@@ -1,18 +1,16 @@
 {
     "name": "@fern-fern/nursery-api-client",
-    "version": "0.0.17",
+    "version": "0.0.18",
     "main": "./index.js",
-    "types": "./types/index.d.ts",
+    "types": "./index.d.ts",
     "files": [
-        "/api",
-        "/schemas",
-        "/core",
-        "/index.*",
-        "!*.ts",
-        "/types"
+        "/api/**/*.{js,js.map,d.ts}",
+        "/schemas/**/*.{js,js.map,d.ts}",
+        "/core/**/*.{js,js.map,d.ts}",
+        "/index.{js,js.map,d.ts}"
     ],
     "scripts": {
-        "format": "prettier --write '**/*.ts'",
+        "format": "prettier --write --print-width 120 '**/*.ts'",
         "build": "esbuild $(find . -name '*.ts' -not -path './node_modules/*') --format=cjs --sourcemap --outdir=. && tsc"
     },
     "dependencies": {

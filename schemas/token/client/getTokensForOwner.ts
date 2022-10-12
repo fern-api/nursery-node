@@ -3,23 +3,16 @@
  */
 
 import * as schemas from "../..";
-import { NurseryApi } from "../../..";
+import { FernNurseryApi } from "../../..";
 import * as core from "../../../core";
 
-export const Response: core.schemas.Schema<
-  schemas.token.TokenMetadata.Raw[],
-  NurseryApi.token.TokenMetadata[]
-> = core.schemas.list(
-  core.schemas.lazyObject(() => schemas.token.TokenMetadata)
-);
-export const Error: core.schemas.Schema<
-  Error.Raw,
-  NurseryApi.token.getTokensForOwner.Error
-> = core.schemas
+export const Response: core.schemas.Schema<schemas.token.TokenMetadata.Raw[], FernNurseryApi.token.TokenMetadata[]> =
+  core.schemas.list(core.schemas.lazyObject(() => schemas.token.TokenMetadata));
+export const Error: core.schemas.Schema<Error.Raw, FernNurseryApi.token.getTokensForOwner.Error> = core.schemas
   .union("errorName", {
     OwnerNotFoundError: core.schemas.object({}),
   })
-  .transform<NurseryApi.token.getTokensForOwner.Error>({
+  .transform<FernNurseryApi.token.getTokensForOwner.Error>({
     parse: (value) => {
       switch (value.errorName) {
         case "OwnerNotFoundError": {

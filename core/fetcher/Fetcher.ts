@@ -5,9 +5,7 @@ export interface Fetcher {
   fetch: FetchFunction;
 }
 
-export type FetchFunction = (
-  args: Fetcher.Args
-) => Promise<APIResponse<unknown, Fetcher.Error>>;
+export type FetchFunction = (args: Fetcher.Args) => Promise<APIResponse<unknown, Fetcher.Error>>;
 
 export declare namespace Fetcher {
   export interface Args {
@@ -19,11 +17,7 @@ export declare namespace Fetcher {
     timeoutMs?: number;
   }
 
-  export type Error =
-    | FailedStatusCodeError
-    | NonJsonError
-    | TimeoutError
-    | UnknownError;
+  export type Error = FailedStatusCodeError | NonJsonError | TimeoutError | UnknownError;
 
   export interface FailedStatusCodeError {
     reason: "status-code";
