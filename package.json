@@ -1,6 +1,6 @@
 {
     "name": "@fern-fern/nursery-api-client",
-    "version": "0.0.14",
+    "version": "0.0.17",
     "main": "./index.js",
     "types": "./types/index.d.ts",
     "files": [
