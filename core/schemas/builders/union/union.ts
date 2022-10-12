@@ -1,44 +1,22 @@
-import {
-  BaseObjectLikeSchema,
-  getObjectLikeUtils,
-  ObjectLikeSchema,
-  OBJECT_LIKE_BRAND,
-} from "../object-like";
+import { BaseObjectLikeSchema, getObjectLikeUtils, ObjectLikeSchema, OBJECT_LIKE_BRAND } from "../object-like";
 import { getSchemaUtils } from "../schema-utils";
 import { Discriminant } from "./discriminant";
-import {
-  inferParsedDiscriminant,
-  inferParsedUnion,
-  inferRawDiscriminant,
-  inferRawUnion,
-  UnionSubtypes,
-} from "./types";
+import { inferParsedDiscriminant, inferParsedUnion, inferRawDiscriminant, inferRawUnion, UnionSubtypes } from "./types";
 
-export function union<
-  D extends string | Discriminant<any, any>,
-  U extends UnionSubtypes<any>
->(
+export function union<D extends string | Discriminant<any, any>, U extends UnionSubtypes<any>>(
   discriminant: D,
   union: U
 ): ObjectLikeSchema<inferRawUnion<D, U>, inferParsedUnion<D, U>> {
   const rawDiscriminant =
-    typeof discriminant === "string"
-      ? discriminant
-      : (discriminant.rawDiscriminant as inferRawDiscriminant<D>);
+    typeof discriminant === "string" ? discriminant : (discriminant.rawDiscriminant as inferRawDiscriminant<D>);
   const parsedDiscriminant =
-    typeof discriminant === "string"
-      ? discriminant
-      : (discriminant.parsedDiscriminant as inferParsedDiscriminant<D>);
+    typeof discriminant === "string" ? discriminant : (discriminant.parsedDiscriminant as inferParsedDiscriminant<D>);
 
-  const baseSchema: BaseObjectLikeSchema<
-    inferRawUnion<D, U>,
-    inferParsedUnion<D, U>
-  > = {
+  const baseSchema: BaseObjectLikeSchema<inferRawUnion<D, U>, inferParsedUnion<D, U>> = {
     ...OBJECT_LIKE_BRAND,
 
     parse: (raw, opts) => {
-      const { [rawDiscriminant]: discriminantValue, ...additionalProperties } =
-        raw;
+      const { [rawDiscriminant]: discriminantValue, ...additionalProperties } = raw;
       const additionalPropertySchemas = union[discriminantValue];
 
       // eslint-disable-next-line @typescript-eslint/no-unnecessary-condition
@@ -56,10 +34,7 @@ export function union<
     },
 
     json: (parsed, opts) => {
-      const {
-        [parsedDiscriminant]: discriminantValue,
-        ...additionalProperties
-      } = parsed;
+      const { [parsedDiscriminant]: discriminantValue, ...additionalProperties } = parsed;
       const additionalPropertySchemas = union[discriminantValue];
 
       // eslint-disable-next-line @typescript-eslint/no-unnecessary-condition

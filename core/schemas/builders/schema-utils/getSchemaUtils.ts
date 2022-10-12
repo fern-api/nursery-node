@@ -3,14 +3,10 @@ import { OptionalSchema, OPTIONAL_BRAND } from "./types";
 
 export interface SchemaUtils<Raw, Parsed> {
   optional: () => OptionalSchema<Raw, Parsed>;
-  transform: <PostTransform>(
-    transformer: BaseSchema<Parsed, PostTransform>
-  ) => Schema<Raw, PostTransform>;
+  transform: <PostTransform>(transformer: BaseSchema<Parsed, PostTransform>) => Schema<Raw, PostTransform>;
 }
 
-export function getSchemaUtils<Raw, Parsed>(
-  schema: BaseSchema<Raw, Parsed>
-): SchemaUtils<Raw, Parsed> {
+export function getSchemaUtils<Raw, Parsed>(schema: BaseSchema<Raw, Parsed>): SchemaUtils<Raw, Parsed> {
   return {
     optional: () => optional(schema),
     transform: (transformer) => transform(schema, transformer),
@@ -21,13 +17,10 @@ export function getSchemaUtils<Raw, Parsed>(
  * schema utils are defined in one file to resolve issues with circular imports
  */
 
-export function optional<Raw, Parsed>(
-  schema: BaseSchema<Raw, Parsed>
-): OptionalSchema<Raw, Parsed> {
+export function optional<Raw, Parsed>(schema: BaseSchema<Raw, Parsed>): OptionalSchema<Raw, Parsed> {
   const baseSchema: BaseSchema<Raw | null | undefined, Parsed | undefined> = {
     parse: (raw, opts) => (raw != null ? schema.parse(raw, opts) : undefined),
-    json: (parsed, opts) =>
-      parsed != null ? schema.json(parsed, opts) : undefined,
+    json: (parsed, opts) => (parsed != null ? schema.json(parsed, opts) : undefined),
   };
 
   return {

@@ -8,6 +8,7 @@ import {
   inferObjectSchemaFromPropertySchemas,
   inferParsedObjectFromPropertySchemas,
   inferRawObjectFromPropertySchemas,
+  ObjectSchema,
   ObjectUtils,
   PropertySchemas,
 } from "./types";
@@ -18,30 +19,22 @@ interface ObjectPropertyWithRawKey {
   valueSchema: Schema<any, any>;
 }
 
-export function object<
-  ParsedKeys extends string,
-  T extends PropertySchemas<ParsedKeys>
->(schemas: T): inferObjectSchemaFromPropertySchemas<T> {
-  const baseSchema: BaseObjectSchema<
-    inferRawObjectFromPropertySchemas<T>,
-    inferParsedObjectFromPropertySchemas<T>
-  > = {
+export function object<ParsedKeys extends string, T extends PropertySchemas<ParsedKeys>>(
+  schemas: T
+): inferObjectSchemaFromPropertySchemas<T> {
+  const baseSchema: BaseObjectSchema<inferRawObjectFromPropertySchemas<T>, inferParsedObjectFromPropertySchemas<T>> = {
     ...OBJECT_LIKE_BRAND,
 
     parse: (raw, { skipUnknownKeysOnParse = false } = {}) => {
       const rawKeyToProperty: Record<string, ObjectPropertyWithRawKey> = {};
 
       for (const [parsedKey, schemaOrObjectProperty] of entries(schemas)) {
-        const rawKey = isProperty(schemaOrObjectProperty)
-          ? schemaOrObjectProperty.rawKey
-          : parsedKey;
+        const rawKey = isProperty(schemaOrObjectProperty) ? schemaOrObjectProperty.rawKey : parsedKey;
 
         const property: ObjectPropertyWithRawKey = {
           rawKey,
           parsedKey,
-          valueSchema: isProperty(schemaOrObjectProperty)
-            ? schemaOrObjectProperty.valueSchema
-            : schemaOrObjectProperty,
+          valueSchema: isProperty(schemaOrObjectProperty) ? schemaOrObjectProperty.valueSchema : schemaOrObjectProperty,
         };
 
         rawKeyToProperty[rawKey] = property;
@@ -73,8 +66,7 @@ export function object<
         // eslint-disable-next-line @typescript-eslint/no-unnecessary-condition
         if (schemaOrObjectProperty != null) {
           if (isProperty(schemaOrObjectProperty)) {
-            const value =
-              schemaOrObjectProperty.valueSchema.json(parsedPropertyValue);
+            const value = schemaOrObjectProperty.valueSchema.json(parsedPropertyValue);
             if (value != null) {
               raw[schemaOrObjectProperty.rawKey] = value;
             }
@@ -101,23 +93,18 @@ export function object<
   };
 }
 
-export function getObjectUtils<Raw, Parsed>(
-  schema: BaseObjectSchema<Raw, Parsed>
-): ObjectUtils<Raw, Parsed> {
+export function getObjectUtils<Raw, Parsed>(schema: BaseObjectSchema<Raw, Parsed>): ObjectUtils<Raw, Parsed> {
   return {
-    extend: <U extends PropertySchemas<keyof U>>(extension: U) => {
-      const baseSchema: BaseObjectSchema<
-        Raw & inferRawObjectFromPropertySchemas<U>,
-        Parsed & inferParsedObjectFromPropertySchemas<U>
-      > = {
+    extend: <RawExtension, ParsedExtension>(extension: ObjectSchema<RawExtension, ParsedExtension>) => {
+      const baseSchema: BaseObjectSchema<Raw & RawExtension, Parsed & ParsedExtension> = {
         ...OBJECT_LIKE_BRAND,
         parse: (raw, opts) => ({
           ...schema.parse(raw, opts),
-          ...object(extension).parse(raw, opts),
+          ...extension.parse(raw, opts),
         }),
         json: (parsed, opts) => ({
           ...schema.json(parsed, opts),
-          ...object(extension).json(parsed, opts),
+          ...extension.json(parsed, opts),
         }),
       };
 

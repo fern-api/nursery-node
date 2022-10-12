@@ -7,6 +7,6 @@
 !.yarn/versions
 node_modules
 .DS_Store
-types
+*.d.ts
 *.js
 *.js.map
