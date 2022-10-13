@@ -5,9 +5,9 @@ __metadata:
   version: 6
   cacheKey: 8
 
-"@fern-fern/nursery-api-client@workspace:.":
+"@fern-api/nursery@workspace:.":
   version: 0.0.0-use.local
-  resolution: "@fern-fern/nursery-api-client@workspace:."
+  resolution: "@fern-api/nursery@workspace:."
   dependencies:
     "@types/node": 17.0.33
     "@types/url-join": 4.0.1
