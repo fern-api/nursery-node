@@ -91,7 +91,7 @@ export class Client implements Client {
     const response = await core.fetcher({
       url: urlJoin(this.options._origin, `/owner/${request.ownerId}`),
       method: "PUT",
-      body: request._body,
+      body: schemas.owner.UpdateOwnerRequest.json(request._body),
     });
     if (response.ok) {
       return {
