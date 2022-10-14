@@ -6,6 +6,5 @@ import { FernNurseryApi } from "../../..";
 
 export interface CreateOwnerRequest {
   ownerId: FernNurseryApi.owner.OwnerId;
-  /** Store arbitrary data about the owner. */
   data?: unknown;
 }
