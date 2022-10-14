@@ -3,7 +3,7 @@ name: ci
 on: [push]
 
 jobs:
-  build:
+  compile:
     runs-on: ubuntu-latest
 
     steps:
@@ -15,23 +15,22 @@ jobs:
       - name: compile
         run: yarn && yarn build
   
-  # Add a secret NPM_TOKEN to start publishing!
-  
-  # publish:
-  #   if: success() && github.ref_type == 'tag'
-  #   needs: [ build ]
-  #   runs-on: ubuntu-latest
-  #   steps:
-  #     - uses: actions/checkout@v2
+  publish:
+    needs: [ compile ]
+    if: github.event_name == 'push' && contains(github.ref, 'refs/tags/')
+    runs-on: ubuntu-latest
+    
+    steps:
+      - uses: actions/checkout@v2
 
-  #     - name: Setup node
-  #       uses: actions/setup-node@v2
+      - name: Setup node
+        uses: actions/setup-node@v2
 
-  #     - run: yarn install
+      - run: yarn install
 
-  #     - name: Publish to NPM
-  #       run: |
-  #         npm config set //registry.npmjs.org/:_authToken ${NPM_TOKEN}
-  #         npm publish --ignore-scripts
-  #       env:
-  #         NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
+      - name: Publish to NPM
+        run: |
+          npm config set //registry.npmjs.org/:_authToken ${NPM_TOKEN}
+          npm publish --ignore-scripts
+        env:
+          NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
