@@ -13,10 +13,7 @@ export const Error: core.schemas.Schema<Error.Raw, FernNurseryApi.owner.update.E
     parse: (value) => {
       switch (value.errorName) {
         case "OwnerNotFoundError": {
-          return {
-            ...value,
-            _visit: (visitor) => visitor.ownerNotFoundError(),
-          };
+          return FernNurseryApi.owner.update.Error.ownerNotFoundError();
         }
       }
     },

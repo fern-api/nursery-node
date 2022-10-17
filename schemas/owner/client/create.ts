@@ -13,10 +13,7 @@ export const Error: core.schemas.Schema<Error.Raw, FernNurseryApi.owner.create.E
     parse: (value) => {
       switch (value.errorName) {
         case "OwnerAlreadyExistsError": {
-          return {
-            ...value,
-            _visit: (visitor) => visitor.ownerAlreadyExistsError(),
-          };
+          return FernNurseryApi.owner.create.Error.ownerAlreadyExistsError();
         }
       }
     },

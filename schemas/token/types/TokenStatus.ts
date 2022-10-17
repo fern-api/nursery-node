@@ -15,22 +15,13 @@ export const TokenStatus: core.schemas.Schema<TokenStatus.Raw, FernNurseryApi.to
     parse: (value) => {
       switch (value.type) {
         case "active": {
-          return {
-            ...value,
-            _visit: (visitor) => visitor.active(),
-          };
+          return FernNurseryApi.token.TokenStatus.active();
         }
         case "expired": {
-          return {
-            ...value,
-            _visit: (visitor) => visitor.expired(),
-          };
+          return FernNurseryApi.token.TokenStatus.expired();
         }
         case "revoked": {
-          return {
-            ...value,
-            _visit: (visitor) => visitor.revoked(),
-          };
+          return FernNurseryApi.token.TokenStatus.revoked();
         }
         default: {
           return {

@@ -13,10 +13,7 @@ export const Error: core.schemas.Schema<Error.Raw, FernNurseryApi.token.getToken
     parse: (value) => {
       switch (value.errorName) {
         case "TokenNotFoundError": {
-          return {
-            ...value,
-            _visit: (visitor) => visitor.tokenNotFoundError(),
-          };
+          return FernNurseryApi.token.getTokenMetadata.Error.tokenNotFoundError();
         }
       }
     },
