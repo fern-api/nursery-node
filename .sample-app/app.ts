@@ -1,1 +1,1 @@
-import { FernNurseryApi } from @fern-api/nursery
+import { FernNurseryApi } from "@fern-api/nursery";
