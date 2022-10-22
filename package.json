@@ -1,6 +1,6 @@
 {
     "name": "@fern-api/nursery",
-    "version": "0.0.53-1-gc1532b1",
+    "version": "0.0.53-2-ga837a73",
     "repository": "https://github.com/fern-api/nursery-node",
     "main": "./index.js",
     "types": "./index.d.ts",
