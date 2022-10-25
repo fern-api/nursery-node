@@ -4,23 +4,23 @@
 
 import { FernNurseryApi } from "../../..";
 import * as core from "../../../core";
-import * as schemas from "../..";
+import * as serializers from "../..";
 
 export const TokenMetadata: core.schemas.ObjectSchema<TokenMetadata.Raw, FernNurseryApi.token.TokenMetadata> =
   core.schemas.object({
-    tokenId: core.schemas.lazy(() => schemas.token.TokenId),
-    ownerId: core.schemas.lazy(() => schemas.owner.OwnerId),
+    tokenId: core.schemas.lazy(() => serializers.token.TokenId),
+    ownerId: core.schemas.lazy(() => serializers.owner.OwnerId),
     description: core.schemas.string().optional(),
     createdTime: core.schemas.date(),
-    status: core.schemas.lazy(() => schemas.token.TokenStatus),
+    status: core.schemas.lazy(() => serializers.token.TokenStatus),
   });
 
 export declare namespace TokenMetadata {
   interface Raw {
-    tokenId: schemas.token.TokenId.Raw;
-    ownerId: schemas.owner.OwnerId.Raw;
+    tokenId: serializers.token.TokenId.Raw;
+    ownerId: serializers.owner.OwnerId.Raw;
     description?: string | null;
     createdTime: string;
-    status: schemas.token.TokenStatus.Raw;
+    status: serializers.token.TokenStatus.Raw;
   }
 }
