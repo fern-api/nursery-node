@@ -4,16 +4,16 @@
 
 import { FernNurseryApi } from "../../..";
 import * as core from "../../../core";
-import * as serializers from "../..";
+import * as schemas from "../..";
 
 export const Owner: core.schemas.ObjectSchema<Owner.Raw, FernNurseryApi.owner.Owner> = core.schemas.object({
-  ownerId: core.schemas.lazy(() => serializers.owner.OwnerId),
+  ownerId: core.schemas.lazy(() => schemas.owner.OwnerId),
   data: core.schemas.unknown(),
 });
 
 export declare namespace Owner {
   interface Raw {
-    ownerId: serializers.owner.OwnerId.Raw;
+    ownerId: schemas.owner.OwnerId.Raw;
     data?: unknown;
   }
 }
