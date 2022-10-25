@@ -4,19 +4,19 @@
 
 import { FernNurseryApi } from "../../..";
 import * as core from "../../../core";
-import * as schemas from "../..";
+import * as serializers from "../..";
 
 export const CreateOwnerRequest: core.schemas.ObjectSchema<
   CreateOwnerRequest.Raw,
   FernNurseryApi.owner.CreateOwnerRequest
 > = core.schemas.object({
-  ownerId: core.schemas.lazy(() => schemas.owner.OwnerId),
+  ownerId: core.schemas.lazy(() => serializers.owner.OwnerId),
   data: core.schemas.unknown(),
 });
 
 export declare namespace CreateOwnerRequest {
   interface Raw {
-    ownerId: schemas.owner.OwnerId.Raw;
+    ownerId: serializers.owner.OwnerId.Raw;
     data?: unknown;
   }
 }

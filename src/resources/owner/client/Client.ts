@@ -4,29 +4,23 @@
 
 import { FernNurseryApi } from "../../..";
 import urlJoin from "url-join";
-import * as schemas from "../../../schemas";
+import * as serializers from "../../../serialization";
 import * as core from "../../../core";
-
-export interface Client {
-  create(request: FernNurseryApi.owner.CreateOwnerRequest): Promise<FernNurseryApi.owner.create.Response>;
-  get(request: FernNurseryApi.owner.get.Request): Promise<FernNurseryApi.owner.get.Response>;
-  update(request: FernNurseryApi.owner.update.Request): Promise<FernNurseryApi.owner.update.Response>;
-}
 
 export declare namespace Client {
   interface Options {
-    _origin: string;
+    environment: string;
   }
 }
 
-export class Client implements Client {
+export class Client {
   constructor(private readonly options: Client.Options) {}
 
   public async create(request: FernNurseryApi.owner.CreateOwnerRequest): Promise<FernNurseryApi.owner.create.Response> {
     const response = await core.fetcher({
-      url: urlJoin(this.options._origin, "/owner/"),
+      url: urlJoin(this.options.environment, "/owner/"),
       method: "POST",
-      body: schemas.owner.CreateOwnerRequest.json(request),
+      body: serializers.owner.CreateOwnerRequest.json(request),
     });
     if (response.ok) {
       return {
@@ -36,11 +30,11 @@ export class Client implements Client {
     }
 
     if (response.error.reason === "status-code") {
-      switch ((response.error.body as schemas.owner.create.Error.Raw)?.errorName) {
+      switch ((response.error.body as serializers.owner.create.Error.Raw)?.errorName) {
         case "OwnerAlreadyExistsError":
           return {
             ok: false,
-            error: schemas.owner.create.Error.parse(response.error.body as schemas.owner.create.Error.Raw),
+            error: serializers.owner.create.Error.parse(response.error.body as serializers.owner.create.Error.Raw),
           };
       }
     }
@@ -57,22 +51,22 @@ export class Client implements Client {
 
   public async get(request: FernNurseryApi.owner.get.Request): Promise<FernNurseryApi.owner.get.Response> {
     const response = await core.fetcher({
-      url: urlJoin(this.options._origin, `/owner/${request.ownerId}`),
+      url: urlJoin(this.options.environment, `/owner/${request.ownerId}`),
       method: "GET",
     });
     if (response.ok) {
       return {
         ok: true,
-        body: schemas.owner.Owner.parse(response.body as schemas.owner.Owner.Raw),
+        body: serializers.owner.Owner.parse(response.body as serializers.owner.Owner.Raw),
       };
     }
 
     if (response.error.reason === "status-code") {
-      switch ((response.error.body as schemas.owner.get.Error.Raw)?.errorName) {
+      switch ((response.error.body as serializers.owner.get.Error.Raw)?.errorName) {
         case "OwnerNotFoundError":
           return {
             ok: false,
-            error: schemas.owner.get.Error.parse(response.error.body as schemas.owner.get.Error.Raw),
+            error: serializers.owner.get.Error.parse(response.error.body as serializers.owner.get.Error.Raw),
           };
       }
     }
@@ -89,23 +83,23 @@ export class Client implements Client {
 
   public async update(request: FernNurseryApi.owner.update.Request): Promise<FernNurseryApi.owner.update.Response> {
     const response = await core.fetcher({
-      url: urlJoin(this.options._origin, `/owner/${request.ownerId}`),
+      url: urlJoin(this.options.environment, `/owner/${request.ownerId}`),
       method: "PUT",
-      body: schemas.owner.UpdateOwnerRequest.json(request._body),
+      body: serializers.owner.UpdateOwnerRequest.json(request._body),
     });
     if (response.ok) {
       return {
         ok: true,
-        body: schemas.owner.Owner.parse(response.body as schemas.owner.Owner.Raw),
+        body: serializers.owner.Owner.parse(response.body as serializers.owner.Owner.Raw),
       };
     }
 
     if (response.error.reason === "status-code") {
-      switch ((response.error.body as schemas.owner.update.Error.Raw)?.errorName) {
+      switch ((response.error.body as serializers.owner.update.Error.Raw)?.errorName) {
         case "OwnerNotFoundError":
           return {
             ok: false,
-            error: schemas.owner.update.Error.parse(response.error.body as schemas.owner.update.Error.Raw),
+            error: serializers.owner.update.Error.parse(response.error.body as serializers.owner.update.Error.Raw),
           };
       }
     }

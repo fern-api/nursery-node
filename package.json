@@ -1,26 +1,22 @@
 {
     "name": "@fern-api/nursery",
-    "version": "0.0.53-6-g690c0ae",
+    "version": "0.0.53-7-g8254d89",
     "repository": "https://github.com/fern-api/nursery-node",
-    "main": "./index.js",
-    "types": "./index.d.ts",
+    "main": "./dist/index.js",
+    "types": "./types/index.d.ts",
     "files": [
-        "/api/**/*.{js,js.map,d.ts}",
-        "/schemas/**/*.{js,js.map,d.ts}",
-        "/core/**/*.{js,js.map,d.ts}",
-        "/index.{js,js.map,d.ts}"
+        "./dist",
+        "./types"
     ],
+    "exports": "./dist",
     "scripts": {
-        "format": "prettier --write --print-width 120 '**/*.ts'",
-        "build": "esbuild $(find . -name '*.ts' -not -path './node_modules/*') --format=cjs --sourcemap --outdir=. && tsc"
+        "format": "prettier --write --print-width 120 'src/**/*.ts'",
+        "build": "esbuild $(find src -name '*.ts') --format=cjs --sourcemap --outdir=dist && tsc"
     },
     "dependencies": {
         "@types/url-join": "4.0.1",
         "axios": "^0.27.2",
         "url-join": "4.0.1"
-    },
-    "peerDependencies": {
-        "axios": "*"
     },
     "devDependencies": {
         "@types/node": "17.0.33",
