@@ -18,7 +18,7 @@ export class Client {
 
   public async create(request: FernNurseryApi.owner.CreateOwnerRequest): Promise<FernNurseryApi.owner.create.Response> {
     const response = await core.fetcher({
-      url: urlJoin(this.options.environment, "/owner/"),
+      url: urlJoin(this.options.environment, "/owner"),
       method: "POST",
       body: serializers.owner.CreateOwnerRequest.json(request),
     });
