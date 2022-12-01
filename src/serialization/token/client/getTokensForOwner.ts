@@ -3,20 +3,20 @@
  */
 
 import * as serializers from "../..";
-import { FernNurseryApi } from "@fern-api/nursery";
+import { FernNursery } from "@fern-api/nursery";
 import * as core from "../../../core";
 
-export const Response: core.schemas.Schema<serializers.TokenMetadata.Raw[], FernNurseryApi.TokenMetadata[]> =
+export const Response: core.schemas.Schema<serializers.TokenMetadata.Raw[], FernNursery.TokenMetadata[]> =
   core.schemas.list(core.schemas.lazyObject(async () => (await import("../..")).TokenMetadata));
-export const Error: core.schemas.Schema<Error.Raw, FernNurseryApi.token.getTokensForOwner.Error> = core.schemas
+export const Error: core.schemas.Schema<Error.Raw, FernNursery.token.getTokensForOwner.Error> = core.schemas
   .union("errorName", {
     OwnerNotFoundError: core.schemas.object({}),
   })
-  .transform<FernNurseryApi.token.getTokensForOwner.Error>({
+  .transform<FernNursery.token.getTokensForOwner.Error>({
     parse: (value) => {
       switch (value.errorName) {
         case "OwnerNotFoundError":
-          return FernNurseryApi.token.getTokensForOwner.Error.ownerNotFoundError();
+          return FernNursery.token.getTokensForOwner.Error.ownerNotFoundError();
       }
     },
     json: (value) => value as any,

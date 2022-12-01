@@ -5,14 +5,14 @@
 import { Client as OwnerClient } from "./resources/owner/client/Client";
 import { Client as TokenClient } from "./resources/token/client/Client";
 
-export declare namespace FernNurseryApiClient {
+export declare namespace FernNurseryClient {
   interface Options {
     environment: string;
   }
 }
 
-export class FernNurseryApiClient {
-  constructor(private readonly options: FernNurseryApiClient.Options) {}
+export class FernNurseryClient {
+  constructor(private readonly options: FernNurseryClient.Options) {}
 
   #owner: OwnerClient | undefined;
 

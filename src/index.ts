@@ -1,2 +1,2 @@
-export * as FernNurseryApi from "./resources";
-export { FernNurseryApiClient } from "./Client";
+export * as FernNursery from "./resources";
+export { FernNurseryClient } from "./Client";
