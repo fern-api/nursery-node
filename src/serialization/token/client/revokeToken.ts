@@ -5,15 +5,15 @@
 import { FernNurseryApi } from "@fern-api/nursery";
 import * as core from "../../../core";
 
-export const Error: core.schemas.Schema<Error.Raw, FernNurseryApi.token.getTokenMetadata.Error> = core.schemas
+export const Error: core.schemas.Schema<Error.Raw, FernNurseryApi.token.revokeToken.Error> = core.schemas
   .union("errorName", {
     TokenNotFoundError: core.schemas.object({}),
   })
-  .transform<FernNurseryApi.token.getTokenMetadata.Error>({
+  .transform<FernNurseryApi.token.revokeToken.Error>({
     parse: (value) => {
       switch (value.errorName) {
         case "TokenNotFoundError":
-          return FernNurseryApi.token.getTokenMetadata.Error.tokenNotFoundError();
+          return FernNurseryApi.token.revokeToken.Error.tokenNotFoundError();
       }
     },
     json: (value) => value as any,

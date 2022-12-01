@@ -5,10 +5,14 @@
 import { FernNurseryApi } from "@fern-api/nursery";
 import * as core from "../../../core";
 
-export type Response = core.APIResponse<FernNurseryApi.TokenMetadata, FernNurseryApi.token.getTokenMetadata.Error>;
+export interface Request {
+  tokenId: FernNurseryApi.TokenId;
+}
+
+export type Response = core.APIResponse<void, FernNurseryApi.token.revokeTokenById.Error>;
 export type Error =
-  | FernNurseryApi.token.getTokenMetadata.Error.TokenNotFoundError
-  | FernNurseryApi.token.getTokenMetadata.Error._Unknown;
+  | FernNurseryApi.token.revokeTokenById.Error.TokenNotFoundError
+  | FernNurseryApi.token.revokeTokenById.Error._Unknown;
 
 export declare namespace Error {
   interface TokenNotFoundError extends _Utils {
@@ -21,7 +25,7 @@ export declare namespace Error {
   }
 
   interface _Utils {
-    _visit: <_Result>(visitor: FernNurseryApi.token.getTokenMetadata.Error._Visitor<_Result>) => _Result;
+    _visit: <_Result>(visitor: FernNurseryApi.token.revokeTokenById.Error._Visitor<_Result>) => _Result;
   }
 
   interface _Visitor<_Result> {
@@ -31,20 +35,20 @@ export declare namespace Error {
 }
 
 export const Error = {
-  tokenNotFoundError: (): FernNurseryApi.token.getTokenMetadata.Error.TokenNotFoundError => {
-    const valueWithoutVisit: Omit<FernNurseryApi.token.getTokenMetadata.Error.TokenNotFoundError, "_visit"> = {
+  tokenNotFoundError: (): FernNurseryApi.token.revokeTokenById.Error.TokenNotFoundError => {
+    const valueWithoutVisit: Omit<FernNurseryApi.token.revokeTokenById.Error.TokenNotFoundError, "_visit"> = {
       errorName: "TokenNotFoundError",
     };
     return core.addNonEnumerableProperty(valueWithoutVisit, "_visit", function <
       _Result
-    >(this: FernNurseryApi.token.getTokenMetadata.Error.TokenNotFoundError, visitor: FernNurseryApi.token.getTokenMetadata.Error._Visitor<_Result>) {
-      return FernNurseryApi.token.getTokenMetadata.Error._visit(this, visitor);
+    >(this: FernNurseryApi.token.revokeTokenById.Error.TokenNotFoundError, visitor: FernNurseryApi.token.revokeTokenById.Error._Visitor<_Result>) {
+      return FernNurseryApi.token.revokeTokenById.Error._visit(this, visitor);
     });
   },
 
   _visit: <_Result>(
-    value: FernNurseryApi.token.getTokenMetadata.Error,
-    visitor: FernNurseryApi.token.getTokenMetadata.Error._Visitor<_Result>
+    value: FernNurseryApi.token.revokeTokenById.Error,
+    visitor: FernNurseryApi.token.revokeTokenById.Error._Visitor<_Result>
   ): _Result => {
     switch (value.errorName) {
       case "TokenNotFoundError":
