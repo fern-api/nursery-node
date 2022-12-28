@@ -8,12 +8,12 @@ import * as core from "../../../core";
 
 export const Owner: core.schemas.ObjectSchema<serializers.Owner.Raw, FernNursery.Owner> = core.schemas.object({
   ownerId: core.schemas.lazy(async () => (await import("../..")).OwnerId),
-  data: core.schemas.unknown(),
+  data: core.schemas.lazy(async () => (await import("../..")).CustomOwnerData),
 });
 
 export declare namespace Owner {
   interface Raw {
     ownerId: serializers.OwnerId.Raw;
-    data?: unknown;
+    data?: serializers.CustomOwnerData.Raw;
   }
 }

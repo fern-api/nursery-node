@@ -6,5 +6,5 @@ import { FernNursery } from "@fern-api/nursery";
 
 export interface CreateOwnerRequest {
   ownerId: FernNursery.OwnerId;
-  data?: unknown;
+  data?: FernNursery.CustomOwnerData;
 }

@@ -8,12 +8,12 @@ import * as core from "../../../core";
 
 export const Request: core.schemas.Schema<serializers.owner.update.Request.Raw, FernNursery.UpdateOwnerRequest> =
   core.schemas.object({
-    data: core.schemas.unknown(),
+    data: core.schemas.lazy(async () => (await import("../..")).CustomOwnerData),
   });
 
 export declare namespace Request {
   interface Raw {
-    data?: unknown;
+    data?: serializers.CustomOwnerData.Raw;
   }
 }
 

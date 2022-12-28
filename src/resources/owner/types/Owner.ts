@@ -4,7 +4,16 @@
 
 import { FernNursery } from "@fern-api/nursery";
 
+/**
+ * @example
+ *     {
+ *         ownerId: "some-owner-id",
+ *         data: {
+ *             "custom-key": "custom-value"
+ *         }
+ *     }
+ */
 export interface Owner {
   ownerId: FernNursery.OwnerId;
-  data?: unknown;
+  data?: FernNursery.CustomOwnerData;
 }

@@ -9,13 +9,13 @@ import * as core from "../../../core";
 export const Request: core.schemas.Schema<serializers.owner.create.Request.Raw, FernNursery.CreateOwnerRequest> =
   core.schemas.object({
     ownerId: core.schemas.lazy(async () => (await import("../..")).OwnerId),
-    data: core.schemas.unknown(),
+    data: core.schemas.lazy(async () => (await import("../..")).CustomOwnerData),
   });
 
 export declare namespace Request {
   interface Raw {
     ownerId: serializers.OwnerId.Raw;
-    data?: unknown;
+    data?: serializers.CustomOwnerData.Raw;
   }
 }
 
