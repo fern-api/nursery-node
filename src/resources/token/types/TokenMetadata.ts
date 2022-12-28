@@ -3,14 +3,13 @@
  */
 
 import { FernNursery } from "@fern-api/nursery";
-import * as core from "../../../core";
 
 /**
  * @example
  *     {
  *         tokenId: "some-token-id",
  *         ownerId: "some-owner-id",
- *         createdTime: await core.schemas.date().parse("2022-12-23T10:43:35Z"),
+ *         createdTime: new Date("2022-12-23T10:43:35Z"),
  *         status: FernNursery.TokenStatus.active()
  *     }
  */

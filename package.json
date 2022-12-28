@@ -1,6 +1,6 @@
 {
     "name": "@fern-api/nursery",
-    "version": "0.0.57-6-g9f29d13",
+    "version": "0.0.57-7-gc60cf58",
     "repository": "https://github.com/fern-api/nursery-node",
     "files": [
         "core",
@@ -12,7 +12,7 @@
     "main": "./index.js",
     "types": "./index.d.ts",
     "scripts": {
-        "format": "prettier --write --print-width 120 'src/**/*.ts'",
+        "format": "prettier --write --print-width 120 src/**/*.ts",
         "build": "tsc && tsc-alias"
     },
     "dependencies": {
