@@ -22,6 +22,7 @@ export class Client {
       method: "POST",
       body: await serializers.token.create.Request.json({
         ownerId: request.ownerId,
+        prefix: request.prefix,
         description: request.description,
       }),
     });

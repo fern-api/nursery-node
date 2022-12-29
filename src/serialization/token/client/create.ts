@@ -9,12 +9,14 @@ import * as core from "../../../core";
 export const Request: core.schemas.Schema<serializers.token.create.Request.Raw, FernNursery.CreateTokenRequest> =
   core.schemas.object({
     ownerId: core.schemas.lazy(async () => (await import("../..")).OwnerId),
+    prefix: core.schemas.string().optional(),
     description: core.schemas.string().optional(),
   });
 
 export declare namespace Request {
   interface Raw {
     ownerId: serializers.OwnerId.Raw;
+    prefix?: string | null;
     description?: string | null;
   }
 }

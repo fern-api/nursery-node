@@ -6,5 +6,6 @@ import { FernNursery } from "@fern-api/nursery";
 
 export interface CreateTokenRequest {
   ownerId: FernNursery.OwnerId;
+  prefix?: string;
   description?: string;
 }
