@@ -1,20 +1,30 @@
 {
     "name": "@fern-api/nursery",
-    "version": "0.0.60-2-gcf7fd4f",
-    "type": "module",
+    "version": "0.0.60",
     "repository": "https://github.com/fern-api/nursery-node",
     "files": [
-        "core",
-        "resources",
-        "serialization",
-        "client",
-        "*.{js,js.map,d.ts}"
+        "index.mjs",
+        "index.cjs",
+        "browser.js",
+        "browser.js.map",
+        "*.d.ts"
     ],
-    "main": "./index.js",
+    "exports": {
+        ".": {
+            "import": "./index.mjs",
+            "module": "./index.mjs",
+            "require": "./index.cjs",
+            "browser": "./browser.js",
+            "default": "./index.cjs"
+        }
+    },
     "types": "./index.d.ts",
     "scripts": {
         "format": "prettier --write --print-width 120 src/**/*.ts",
-        "build": "tsc && tsc-alias"
+        "build:esm": "esbuild src/index.ts --bundle --platform=node --format=esm --outfile=index.mjs",
+        "build:cjs": "esbuild src/index.ts --bundle --platform=node --format=cjs --outfile=index.cjs",
+        "build:browser": "esbuild src/index.ts --bundle --platform=browser --sourcemap --outfile=browser.js",
+        "build": "yarn build:esm && yarn build:cjs && yarn build:browser && tsc && tsc-alias"
     },
     "dependencies": {
         "@types/url-join": "4.0.1",
@@ -23,6 +33,7 @@
     },
     "devDependencies": {
         "@types/node": "17.0.33",
+        "esbuild": "0.16.13",
         "prettier": "2.7.1",
         "tsc-alias": "^1.7.1",
         "typescript": "4.6.4"

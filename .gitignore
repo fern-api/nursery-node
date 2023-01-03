@@ -3,6 +3,8 @@ node_modules
 *.d.ts
 *.js
 *.js.map
+*.cjs
+*.mjs
 
 # yarn berry
 .pnp.*
