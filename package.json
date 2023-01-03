@@ -1,6 +1,6 @@
 {
     "name": "@fern-api/nursery",
-    "version": "0.0.60-5-gb3f1fd4",
+    "version": "0.0.60-6-gd90192f",
     "repository": "https://github.com/fern-api/nursery-node",
     "files": [
         "index.mjs",
@@ -21,7 +21,7 @@
     "types": "./index.d.ts",
     "scripts": {
         "format": "prettier --write --print-width 120 src/**/*.ts",
-        "build:esm": "esbuild src/index.ts --bundle --platform=node --format=esm --outfile=index.mjs",
+        "build:esm": "esbuild src/index.ts --bundle --platform=node --format=esm --banner:js=\"import { createRequire } from 'module';\nconst require = createRequire(import.meta.url);\" --outfile=index.mjs",
         "build:cjs": "esbuild src/index.ts --bundle --platform=node --format=cjs --outfile=index.cjs",
         "build:browser": "esbuild src/index.ts --bundle --platform=browser --sourcemap --outfile=browser.js",
         "build": "yarn build:esm && yarn build:cjs && yarn build:browser && tsc && tsc-alias"
