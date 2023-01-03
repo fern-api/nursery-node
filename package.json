@@ -1,20 +1,18 @@
 {
     "name": "@fern-api/nursery",
-    "version": "0.0.60",
+    "version": "0.0.60-1-g71c4e15",
     "type": "module",
     "repository": "https://github.com/fern-api/nursery-node",
     "files": [
-        "core",
-        "resources",
-        "serialization",
-        "client",
-        "*.{js,js.map,d.ts}"
+        "index.js",
+        "index.js.map",
+        "*.d.ts"
     ],
     "main": "./index.js",
     "types": "./index.d.ts",
     "scripts": {
         "format": "prettier --write --print-width 120 src/**/*.ts",
-        "build": "tsc && tsc-alias"
+        "build": "esbuild src/index.ts --bundle --sourcemap --format=esm --outfile=index.js && tsc && tsc-alias"
     },
     "dependencies": {
         "@types/url-join": "4.0.1",
@@ -23,6 +21,7 @@
     },
     "devDependencies": {
         "@types/node": "17.0.33",
+        "esbuild": "^0.16.13",
         "prettier": "2.7.1",
         "tsc-alias": "^1.7.1",
         "typescript": "4.6.4"
