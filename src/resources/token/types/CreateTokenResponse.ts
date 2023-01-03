@@ -4,13 +4,6 @@
 
 import { FernNursery } from "@fern-api/nursery";
 
-/**
- * @example
- *     {
- *         token: "some-token-value",
- *         tokenId: "some-token-id"
- *     }
- */
 export interface CreateTokenResponse {
   token: string;
   tokenId: FernNursery.TokenId;

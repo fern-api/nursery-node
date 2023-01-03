@@ -4,8 +4,5 @@
 
 /**
  * Unique id for an owner.
- *
- * @example
- *     "some-owner-id"
  */
 export type OwnerId = string;
