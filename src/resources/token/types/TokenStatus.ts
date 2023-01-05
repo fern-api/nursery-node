@@ -5,6 +5,16 @@
 import { FernNursery } from "@fern-api/nursery";
 import * as core from "../../../core";
 
+/**
+ * @example
+ *     FernNursery.TokenStatus.active()
+ *
+ * @example
+ *     FernNursery.TokenStatus.expired()
+ *
+ * @example
+ *     FernNursery.TokenStatus.revoked()
+ */
 export type TokenStatus =
   | FernNursery.TokenStatus.Active
   | FernNursery.TokenStatus.Expired
