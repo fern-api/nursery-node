@@ -7,15 +7,16 @@
         "esModuleInterop": true,
         "skipLibCheck": true,
         "declaration": true,
-        "emitDeclarationOnly": true,
         "sourceMap": true,
+        "inlineSources": true,
+        "noUncheckedIndexedAccess": true,
         "noUnusedLocals": true,
         "noUnusedParameters": true,
         "outDir": ".",
         "rootDir": "src",
         "baseUrl": "src",
         "paths": {
-            "@fern-api/nursery": [
+            "@cognodyne/nursery": [
                 "."
             ]
         }
